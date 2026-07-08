@@ -1,0 +1,44 @@
+[
+  {
+    "name": "HTML5",
+    "icon": "https://img.icons8.com/color/48/html-5--v1.png"
+  },
+  {
+    "name": "CSS3",
+    "icon": "https://img.icons8.com/color/48/css3.png"
+  },
+  {
+    "name": "JavaScript",
+    "icon": "https://img.icons8.com/color/48/javascript--v1.png"
+  },
+  {
+    "name": "React",
+    "icon": "https://img.icons8.com/external-tal-revivo-color-tal-revivo/48/external-react-a-javascript-library-for-building-user-interfaces-logo-color-tal-revivo.png"
+  },
+  {
+    "name": "Git",
+    "icon": "https://img.icons8.com/color/48/git.png"
+  },
+  {
+    "name": "GitHub",
+    "icon": "https://img.icons8.com/glyph-neue/48/ffffff/github.png"
+  },
+
+  {
+    "name": " NodeJS",
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/d/d5/Nodejs_Logo.png"
+  },
+    {
+    "name": " mongodb ",
+    "icon": "https://commons.wikimedia.org/wiki/File:MongoDB_Logo.png"
+  },
+
+  { 
+    "name": "VS Code",
+    "icon": "https://img.icons8.com/color/48/visual-studio-code-2019.png"
+  },
+  {
+    "name": "Figma",
+    "icon": "https://img.icons8.com/color/48/figma--v1.png"
+  }
+]

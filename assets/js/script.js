@@ -92,16 +92,44 @@ async function fetchData(type = "skills") {
 function showSkills(skills) {
     let skillsContainer = document.getElementById("skillsContainer");
     let skillHTML = "";
+
     skills.forEach(skill => {
         skillHTML += `
-        <div class="bar">
-              <div class="info">
-                <img src=${skill.icon} alt="skill" />
+        <div class="bar" data-category="${skill.category}">
+            <div class="info">
+                <img src="${skill.icon}" alt="${skill.name}" />
                 <span>${skill.name}</span>
-              </div>
-            </div>`
+            </div>
+        </div>`;
     });
+
     skillsContainer.innerHTML = skillHTML;
+
+    // Filter Function
+    const filterBtns = document.querySelectorAll(".filter-btn");
+    const cards = document.querySelectorAll("#skillsContainer .bar");
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener("click", function () {
+
+            filterBtns.forEach(b => b.classList.remove("active"));
+            this.classList.add("active");
+
+            const filter = this.dataset.filter;
+
+            cards.forEach(card => {
+
+                if (filter === "all" || card.dataset.category === filter) {
+                    card.style.display = "block";
+                } else {
+                    card.style.display = "none";
+                }
+
+            });
+
+        });
+    });
+
 }
 
 function showProjects(projects) {

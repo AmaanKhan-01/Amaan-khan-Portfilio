@@ -38,19 +38,19 @@ $(document).ready(function () {
     });
 
     // <!-- emailjs to mail contact form data -->
-    $("#contact-form").submit(function (event) {
-        emailjs.init("user_TTDmetQLYgWCLzHTDgqxm");
+        $("#contact-form").submit(function (event) {
+            emailjs.init("user_TTDmetQLYgWCLzHTDgqxm");
 
-        emailjs.sendForm('contact_service', 'template_contact', '#contact-form')
-            .then(function (response) {
-                console.log('SUCCESS!', response.status, response.text);
-                document.getElementById("contact-form").reset();
-                alert("Form Submitted Successfully");
-            }, function (error) {
-                console.log('FAILED...', error);
-                alert("Form Submission Failed! Try Again");
-            });
-        event.preventDefault();
+            emailjs.sendForm('contact_service', 'template_contact', '#contact-form')
+                .then(function (response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    document.getElementById("contact-form").reset();
+                    alert("Form Submitted Successfully");
+                }, function (error) {
+                    console.log('FAILED...', error);
+                    alert("Form Submission Failed! Try Again");
+                });
+            event.preventDefault();
     });
     // <!-- emailjs to mail contact form data -->
 
@@ -79,57 +79,70 @@ var typed = new Typed(".typing-text", {
 });
 // <!-- typed js effect ends -->
 
-async function fetchData(type = "skills") {
-    let response
-    type === "skills" ?
-        response = await fetch("skills.json")
-        :
-        response = await fetch("./projects/projects.json")
+async function fetchData(type = "projects") {
+
+    const response = await fetch("./projects/projects.json");
+
     const data = await response.json();
+
     return data;
+
 }
+// const skills = [
+//     { name: "HTML5", category: "frontend", iconClass: "fab fa-html5", level: 95 },
+//     { name: "CSS3", category: "frontend", iconClass: "fab fa-css3-alt", level: 92 },
+//     { name: "JavaScript", category: "frontend", iconClass: "fab fa-js-square", level: 90 },
+//     { name: "React", category: "frontend", iconClass: "fab fa-react", level: 80 },
+//     { name: "Node.js", category: "backend", iconClass: "fab fa-node-js", level: 75 },
+//     { name: "MongoDB", category: "backend", iconClass: "fas fa-database", level: 70 },
+//     { name: "Git", category: "tools", iconClass: "fab fa-git-alt", level: 88 },
+//     { name: "GitHub", category: "tools", iconClass: "fab fa-github", level: 90 },
+//     { name: "VS Code", category: "tools", iconClass: "fas fa-code", level: 92 },
+//     { name: "Figma", category: "tools", iconClass: "fab fa-figma", level: 70 },
+//     { name: "TypeScript", category: "learning", iconClass: "fas fa-code", level: 50 },
+// ];
 
-function showSkills(skills) {
-    let skillsContainer = document.getElementById("skillsContainer");
-    let skillHTML = "";
+function showSkills(skillsData) {
+    const skillsContainer = document.getElementById("skillsContainer");
+    if (!skillsContainer) return;
 
-    skills.forEach(skill => {
-        skillHTML += `
-        <div class="bar" data-category="${skill.category}">
-            <div class="info">
-                <img src="${skill.icon}" alt="${skill.name}" />
-                <span>${skill.name}</span>
+        const createCard = (s) => {
+            const icon = s.iconClass ? `<i class="skill-icon fa-2x ${s.iconClass}" aria-hidden="true"></i>` : `<img src="${s.icon || ''}" alt="${s.name}" onerror="this.style.display='none'"/>`;
+            return `
+        <div class="skill-card" data-category="${s.category}">
+            <div class="card-head">
+                ${icon}
+                <h4>${s.name}</h4>
+                <span class="skill-level">${s.level}%</span>
+            </div>
+            <div class="skill-progress">
+                <div class="progress-bar" style="width: ${s.level}%"></div>
             </div>
         </div>`;
-    });
+        };
 
-    skillsContainer.innerHTML = skillHTML;
+    skillsContainer.innerHTML = skillsData.map(createCard).join("");
 
     // Filter Function
     const filterBtns = document.querySelectorAll(".filter-btn");
-    const cards = document.querySelectorAll("#skillsContainer .bar");
+    const cards = document.querySelectorAll("#skillsContainer .skill-card");
 
     filterBtns.forEach(btn => {
         btn.addEventListener("click", function () {
-
             filterBtns.forEach(b => b.classList.remove("active"));
             this.classList.add("active");
 
             const filter = this.dataset.filter;
 
             cards.forEach(card => {
-
                 if (filter === "all" || card.dataset.category === filter) {
                     card.style.display = "block";
                 } else {
                     card.style.display = "none";
                 }
-
             });
-
         });
     });
-
 }
 
 function showProjects(projects) {
@@ -174,8 +187,10 @@ function showProjects(projects) {
 
 }
 
-fetchData().then(data => {
-    showSkills(data);
+showSkills(skills);
+
+fetchData("projects").then(data => {
+    showProjects(data);
 });
 
 fetchData("projects").then(data => {

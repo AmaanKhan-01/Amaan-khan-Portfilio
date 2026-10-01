@@ -46,7 +46,7 @@ $(document).ready(function () {
                 .then(function (response) {
                     console.log('SUCCESS!', response.status, response.text);
                     document.getElementById("contact-form").reset();
-                    alert("Form Submitted Successfully");
+                    alert("Form Submitted Successfully , Got reply soon");
                 }, function (error) {
                     console.log('FAILED...', error);
                     alert("Form Submission Failed! Try Again");
@@ -76,8 +76,9 @@ Message:
 ${message}`;
 
   window.location.href =
-    `mailto:your@email.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    `mailto:amaankhanprofessional56@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 });
+
 
 });
 

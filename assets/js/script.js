@@ -26,6 +26,7 @@ $(document).ready(function () {
                 $('.navbar ul li a').removeClass('active');
                 $('.navbar').find(`[href="#${id}"]`).addClass('active');
             }
+        
         });
     });
 
@@ -52,7 +53,31 @@ $(document).ready(function () {
                 });
             event.preventDefault();
     });
+
     // <!-- emailjs to mail contact form data -->
+    
+
+    //  form  Submition 
+    document.getElementById("contact-form").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const name = document.querySelector('[name="name"]').value;
+  const email = document.querySelector('[name="email"]').value;
+  const phone = document.querySelector('[name="phone"]').value;
+  const message = document.querySelector('[name="message"]').value;
+
+  const subject = `Portfolio Contact from ${name}`;
+
+  const body = `Name: ${name}
+Email: ${email}
+Phone: ${phone}
+
+Message:
+${message}`;
+
+  window.location.href =
+    `mailto:your@email.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+});
 
 });
 
